@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "investigadores_ppales")
+@Table(name = "investigadores")
 @NamedQueries({
     @NamedQuery(name = "Investigador.encontrarTodosInvestigadores", query = "SELECT g FROM Investigador g ORDER BY g.codigoInvestigador")
 })
@@ -15,14 +15,12 @@ public class Investigador implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
     private int codigoInvestigador;
-    @Column(name= "id_investigador")
-    private int idInvestigador;
     private String nombre;
     private int telefono;
-    @OneToMany(mappedBy = "codigoInv")
-    private List<Inv_grupos> inv_gruposs;
-    @OneToOne(mappedBy = "codigoInv")
-    private Inv_grupos inv_grupos;
+    
+    
+    @ManyToMany(mappedBy = "investigadores")
+    private List<Grupo> grupos;
 
     public Investigador() {
     }
@@ -31,9 +29,8 @@ public class Investigador implements Serializable {
         this.codigoInvestigador = codigoInvestigador;
     }
 
-    public Investigador(int codigoInvestigador, int idInvestigador, String nombre, int telefono) {
+    public Investigador(int codigoInvestigador, String nombre, int telefono) {
         this.codigoInvestigador = codigoInvestigador;
-        this.idInvestigador = idInvestigador;
         this.nombre = nombre;
         this.telefono = telefono;
     }
@@ -46,13 +43,6 @@ public class Investigador implements Serializable {
         this.codigoInvestigador = codigoInvestigador;
     }
 
-    public int getIdInvestigador() {
-        return idInvestigador;
-    }
-
-    public void setIdInvestigador(int id_investigador) {
-        this.idInvestigador = id_investigador;
-    }
 
     public String getNombre() {
         return nombre;
@@ -72,6 +62,14 @@ public class Investigador implements Serializable {
 
     @Override
     public String toString() {
-        return "Proveedor{" + "codigo=" + codigoInvestigador + ", id_investigador=" + idInvestigador + ", nombre=" + nombre + ", telefono="+ telefono + '}';
+        return "Investigador{" + "codigo=" + codigoInvestigador +  ", nombre=" + nombre + ", telefono="+ telefono + ", grupos=" + grupos + '}';
+    }
+
+    public List<Grupo> getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
     }
 }

@@ -1,6 +1,7 @@
 package com.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -18,8 +19,14 @@ public class Grupo implements Serializable {
     private String nombre;
     @Column(name = "codigo_col")
     private String codCol;
-    @OneToMany(mappedBy = "codigoGrupo")
-    private List<Inv_grupos> inv_gruposs;
+
+    @JoinTable(
+            name = "inv_grupos",
+            joinColumns = @JoinColumn(name = "id_grupos", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "id_investigadores", nullable = false)
+    )
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Investigador> investigadores;
 
     public Grupo() {
     }
@@ -57,10 +64,22 @@ public class Grupo implements Serializable {
     public void setCodCol(String codCol) {
         this.codCol = codCol;
     }
-    
+
+    public void setInvestigadores(Investigador investigador) {
+        if (this.investigadores == null) {
+            this.investigadores = new ArrayList<>();
+        }
+
+        this.investigadores.add(investigador);
+    }
+
     @Override
     public String toString() {
-        return "Grupo{" + "codigo=" + codigoGrupo + ", nombre=" + nombre + ", codigo_col=" + codCol + '}';
+        return "Grupo{" + "codigo=" + codigoGrupo + ", nombre=" + nombre + ", codigo_col=" + codCol + ", ivestigadores=" + investigadores + '}';
     }
+
+    public List<Investigador> getInvestigadores() {
+        return investigadores;
+    }
+
 }
-    

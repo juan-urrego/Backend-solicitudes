@@ -29,6 +29,7 @@ public class InvestigadorDaoImpl implements InvestigadorDao{
 
     @Override
     public void actualizarInvestigador(Investigador investigador) {
+        em.remove(em.merge(investigador));
         em.merge(investigador);
     }
 
