@@ -6,9 +6,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import javax.ws.rs.core.Response.Status;
-import com.data.GrupoDao;
 import com.data.ProveedorDao;
-import com.domain.Grupo;
 import com.domain.Proveedor;
 
 @Stateless
@@ -53,6 +51,7 @@ public class ProveedorServiceRS {
         if ( proveedor != null) {
             proveedorDao.actualizarProveedor(proveedorModificado);
             System.out.println("Proveedor modificado:" + proveedorModificado);
+            eliminarProveedor(codigo);
             return Response.ok().entity(proveedorModificado).build();
         } else {
             return Response.status(Status.NOT_FOUND).build();
@@ -65,7 +64,7 @@ public class ProveedorServiceRS {
     @Path("{codigo}")
     public Response eliminarProveedor(@PathParam("codigo") int codigo) {
         proveedorDao.eliminarProveedor(new Proveedor(codigo));
-        System.out.println("Proveedor eliminado con el codigo:" + codigo);
+        System.out.println("Proveedor eliminado con el id_proveedor:" + codigo);
         return Response.ok().build();
     }
 }

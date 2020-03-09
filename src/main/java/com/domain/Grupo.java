@@ -8,14 +8,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "grupos")
 @NamedQueries({
-    @NamedQuery(name = "Grupo.encontrarTodosGrupos", query = "SELECT g FROM Grupo g ORDER BY g.codigoGrupo")
+    @NamedQuery(name = "Grupo.encontrarTodosGrupos", query = "SELECT g FROM Grupo g ORDER BY g.codigo")
 })
 public class Grupo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo")
-    private int codigoGrupo;
+    private int codigo;
+    @Column(name = "id_grupo")
+    private int idGrupo;
     private String nombre;
     @Column(name = "codigo_col")
     private String codCol;
@@ -31,22 +32,23 @@ public class Grupo implements Serializable {
     public Grupo() {
     }
 
-    public Grupo(int codigoGrupo) {
-        this.codigoGrupo = codigoGrupo;
+    public Grupo(int codigo) {
+        this.codigo = codigo;
     }
 
-    public Grupo(int codigoGrupo, String nombre, String codCol) {
-        this.codigoGrupo = codigoGrupo;
+    public Grupo(int codigo,int idGrupo,String nombre, String codCol) {
+        this.codigo = codigo;
+        this.idGrupo = idGrupo;
         this.nombre = nombre;
         this.codCol = codCol;
     }
 
-    public int getCodigoGrupo() {
-        return codigoGrupo;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoGrupo(int codigoGrupo) {
-        this.codigoGrupo = codigoGrupo;
+    public void setCodigo(int codigoGrupo) {
+        this.codigo = codigoGrupo;
     }
 
     public String getNombre() {
@@ -73,9 +75,18 @@ public class Grupo implements Serializable {
         this.investigadores.add(investigador);
     }
 
+    public int getIdGrupo() {
+        return idGrupo;
+    }
+
+    public void setIdGrupo(int idGrupo) {
+        this.idGrupo = idGrupo;
+
+    }
+
     @Override
     public String toString() {
-        return "Grupo{" + "codigo=" + codigoGrupo + ", nombre=" + nombre + ", codigo_col=" + codCol + ", ivestigadores=" + investigadores + '}';
+        return "Grupo{" + "codigo=" + codigo + ", id_grupo=" + idGrupo + ", nombre=" + nombre + ", codigo_col=" + codCol + ", ivestigadores=" + investigadores + '}';
     }
 
     public List<Investigador> getInvestigadores() {

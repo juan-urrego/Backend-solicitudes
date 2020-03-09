@@ -6,14 +6,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "proveedores")
 @NamedQueries({
-    @NamedQuery(name = "Proveedor.encontrarTodosProveedores", query = "SELECT p FROM Proveedor p ORDER BY p.codigoProveedor")
+    @NamedQuery(name = "Proveedor.encontrarTodosProveedores", query = "SELECT p FROM Proveedor p ORDER BY p.codigo")
 })
 public class Proveedor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo")
-    private int codigoProveedor;
+    private int codigo;
+    @Column(name="id_proveedor")
+    private int idProveedor;
     private int nit;
     private String nombre;
     private int telefono;
@@ -21,23 +22,24 @@ public class Proveedor implements Serializable {
     public Proveedor() {
     }
 
-    public Proveedor(int codigoProveedor) {
-        this.codigoProveedor = codigoProveedor;
+    public Proveedor(int codigo) {
+        this.codigo = codigo;
     }
 
-    public Proveedor(int codigoProveedor, int nit, String nombre, int telefono) {
-        this.codigoProveedor = codigoProveedor;
+    public Proveedor(int codigo,int idProveedor ,int nit, String nombre, int telefono) {
+        this.codigo = codigo;
+        this.idProveedor = idProveedor;
         this.nit = nit;
         this.nombre = nombre;
         this.telefono = telefono;
     }
 
-    public int getCodigoProveedor() {
-        return codigoProveedor;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoProveedor(int codigoProveedor) {
-        this.codigoProveedor = codigoProveedor;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public int getNit() {
@@ -64,8 +66,19 @@ public class Proveedor implements Serializable {
         this.telefono = telefono;
     }
     
+    public int getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+    
+    
     @Override
     public String toString() {
-        return "Proveedor{" + "codigo=" + codigoProveedor + ", nombre=" + nombre + ", nit=" + nit + ", telefono="+ telefono + '}';
+        return "Proveedor{" + "codigo=" + codigo + ", idProveedor=" + idProveedor + ", nombre=" + nombre + ", nit=" + nit + ", telefono="+ telefono + '}';
     }
+
+
 }

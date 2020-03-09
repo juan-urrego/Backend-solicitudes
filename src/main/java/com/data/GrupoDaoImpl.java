@@ -18,7 +18,7 @@ public class GrupoDaoImpl implements GrupoDao{
 
     @Override
     public Grupo encontrarGrupo(Grupo grupo) {
-        return em.find(Grupo.class, grupo.getCodigoGrupo());
+        return em.find(Grupo.class, grupo.getCodigo());
     }
 
     @Override
