@@ -36,7 +36,7 @@ public class Grupo implements Serializable {
         this.codigo = codigo;
     }
 
-    public Grupo(int codigo,int idGrupo,String nombre, String codCol) {
+    public Grupo(int codigo, int idGrupo, String nombre, String codCol) {
         this.codigo = codigo;
         this.idGrupo = idGrupo;
         this.nombre = nombre;
@@ -67,14 +67,6 @@ public class Grupo implements Serializable {
         this.codCol = codCol;
     }
 
-    public void setInvestigadores(Investigador investigador) {
-        if (this.investigadores == null) {
-            this.investigadores = new ArrayList<>();
-        }
-
-        this.investigadores.add(investigador);
-    }
-
     public int getIdGrupo() {
         return idGrupo;
     }
@@ -84,13 +76,21 @@ public class Grupo implements Serializable {
 
     }
 
-    @Override
-    public String toString() {
-        return "Grupo{" + "codigo=" + codigo + ", id_grupo=" + idGrupo + ", nombre=" + nombre + ", codigo_col=" + codCol + ", ivestigadores=" + investigadores + '}';
+    public void setInvestigadores(Investigador investigador) {
+        if (this.investigadores == null) {
+            this.investigadores = new ArrayList<>();
+        }
+
+        this.investigadores.add(investigador);
     }
 
     public List<Investigador> getInvestigadores() {
         return investigadores;
+    }
+
+    @Override
+    public String toString() {
+        return "Grupo{" + "codigo=" + codigo + ", id_grupo=" + idGrupo + ", nombre=" + nombre + ", codigo_col=" + codCol + ", ivestigadores=" + investigadores + '}';
     }
 
 }

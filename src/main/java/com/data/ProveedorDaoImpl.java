@@ -18,7 +18,7 @@ public class ProveedorDaoImpl implements ProveedorDao{
 
     @Override
     public Proveedor encontrarProveedor(Proveedor proveedor) {
-        return em.find(Proveedor.class, proveedor.getCodigo());
+        return em.find(Proveedor.class, proveedor.getIdProveedor());
     }
 
     @Override

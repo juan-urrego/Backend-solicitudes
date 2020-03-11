@@ -6,15 +6,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "proveedores")
 @NamedQueries({
-    @NamedQuery(name = "Proveedor.encontrarTodosProveedores", query = "SELECT p FROM Proveedor p ORDER BY p.codigo")
+    @NamedQuery(name = "Proveedor.encontrarTodosProveedores", query = "SELECT p FROM Proveedor p ORDER BY p.id_proveedor")
 })
 public class Proveedor implements Serializable {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codigo;
-    @Column(name="id_proveedor")
-    private int idProveedor;
+    // @Column(name="id_proveedor")
+    
+    private int id_proveedor;
     private int nit;
     private String nombre;
     private int telefono;
@@ -22,24 +20,15 @@ public class Proveedor implements Serializable {
     public Proveedor() {
     }
 
-    public Proveedor(int codigo) {
-        this.codigo = codigo;
+    public Proveedor(int id_proveedor) {
+        this.id_proveedor = id_proveedor;
     }
 
-    public Proveedor(int codigo,int idProveedor ,int nit, String nombre, int telefono) {
-        this.codigo = codigo;
-        this.idProveedor = idProveedor;
+    public Proveedor(int id_proveedor, int nit, String nombre, int telefono) {
+        this.id_proveedor = id_proveedor;
         this.nit = nit;
         this.nombre = nombre;
         this.telefono = telefono;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
     }
 
     public int getNit() {
@@ -65,20 +54,18 @@ public class Proveedor implements Serializable {
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
-    
+
     public int getIdProveedor() {
-        return idProveedor;
+        return id_proveedor;
     }
 
     public void setIdProveedor(int idProveedor) {
-        this.idProveedor = idProveedor;
-    }
-    
-    
-    @Override
-    public String toString() {
-        return "Proveedor{" + "codigo=" + codigo + ", idProveedor=" + idProveedor + ", nombre=" + nombre + ", nit=" + nit + ", telefono="+ telefono + '}';
+        this.id_proveedor = idProveedor;
     }
 
+    @Override
+    public String toString() {
+        return "Proveedor{" + "id_proveedor=" + id_proveedor + ", nombre=" + nombre + ", nit=" + nit + ", telefono=" + telefono + '}';
+    }
 
 }
