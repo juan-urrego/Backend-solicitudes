@@ -47,3 +47,7 @@ Importar DB
 11. new
 12. name : jdbc/SolicitudDb
 13. Conection Pool: Seleccionamos la que creamos (SolicitudPool)
+
+
+# Postman
+https://app.getpostman.com/join-team?invite_code=f7ef6871f952ee4fba4e734403430970
