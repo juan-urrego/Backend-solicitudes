@@ -14,8 +14,11 @@ a continuacion: modelo entidad-relacion
 
 Dercagamos e instalamos 
 -Glassfish 5.0 : http://download.oracle.com/glassfish/5.0/release/glassfish-5.0.zip
+
 -mysql 8
+
 -conector-mysql.jar v8
+
 -Openjdk 11 y 8
 
 Importar DB 
@@ -23,7 +26,7 @@ Importar DB
 1. extraemos glassfish.zip
 2. en el IDE configuramos el servidor y le damos la ruta a la carpeta descomprimida
 3. el conector-mysql-jar se debe mover a la ruta : glassfish5\glassgish\lib
-4. en el IDE click derecho en "view domain"
+4. en el IDE click derecho en "view domain admin console"
 
 ## Configuracion mysql
 1. despues de cargar el panel de control de glassfish
