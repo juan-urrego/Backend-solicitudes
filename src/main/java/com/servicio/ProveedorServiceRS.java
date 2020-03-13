@@ -27,7 +27,7 @@ public class ProveedorServiceRS {
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("{idProveedor}") //hace referencia al path: /personas/{id}, ej. /personas/1
-    public Proveedor encontrarProveedor(@PathParam("idProveedor") int idProveedor) {
+    public Proveedor encontrarProveedor(@PathParam("idProveedor") String idProveedor) {
         Proveedor proveedor = proveedorDao.encontrarProveedor(new Proveedor(idProveedor));
         System.out.println("Proveedor encontrado:" + proveedor);
         return proveedor;
@@ -46,7 +46,7 @@ public class ProveedorServiceRS {
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("{idProveedor}")
-    public Response modificarProveedor(@PathParam("idProveedor") int idProveedor, Proveedor proveedorModificado) {
+    public Response modificarProveedor(@PathParam("idProveedor") String idProveedor, Proveedor proveedorModificado) {
         Proveedor proveedor = proveedorDao.encontrarProveedor(new Proveedor(idProveedor));
         if ( proveedor != null) {
             proveedorDao.actualizarProveedor(proveedorModificado);
@@ -62,7 +62,7 @@ public class ProveedorServiceRS {
     @DELETE
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("{idProveedor}")
-    public Response eliminarProveedor(@PathParam("idProveedor") int idProveedor) {
+    public Response eliminarProveedor(@PathParam("idProveedor") String idProveedor) {
         proveedorDao.eliminarProveedor(new Proveedor(idProveedor));
         System.out.println("Proveedor eliminado con el id_proveedor:" + idProveedor);
         return Response.ok().build();

@@ -18,7 +18,7 @@ public class InvestigadorDaoImpl implements InvestigadorDao{
 
     @Override
     public Investigador encontrarInvestigador(Investigador investigador) {
-        return em.find(Investigador.class, investigador.getCodigo());
+        return em.find(Investigador.class, investigador.getIdInvestigador());
     }
 
     @Override

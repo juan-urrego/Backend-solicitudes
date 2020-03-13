@@ -8,15 +8,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "grupos")
 @NamedQueries({
-    @NamedQuery(name = "Grupo.encontrarTodosGrupos", query = "SELECT g FROM Grupo g ORDER BY g.codigo")
+    @NamedQuery(name = "Grupo.encontrarTodosGrupos", query = "SELECT g FROM Grupo g ORDER BY g.idGrupo")
 })
 public class Grupo implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codigo;
     @Column(name = "id_grupo")
-    private int idGrupo;
+    private String idGrupo;
     private String nombre;
     @Column(name = "codigo_col")
     private String codCol;
@@ -32,24 +30,32 @@ public class Grupo implements Serializable {
     public Grupo() {
     }
 
-    public Grupo(int codigo) {
-        this.codigo = codigo;
+    public Grupo(String idGrupo) {
+        this.idGrupo = idGrupo;
     }
 
-    public Grupo(int codigo, int idGrupo, String nombre, String codCol) {
-        this.codigo = codigo;
+    public Grupo(String idGrupo, String nombre, String codCol, List<Investigador> investigadores) {
         this.idGrupo = idGrupo;
         this.nombre = nombre;
         this.codCol = codCol;
+        this.investigadores = investigadores;
     }
 
-    public int getCodigo() {
-        return codigo;
+ 
+    
+    public void setInvestigadores(Investigador investigador){
+        if(this.investigadores == null){
+            this.investigadores = new ArrayList<>();
+        }
+        
+        this.investigadores.add(investigador);
     }
 
-    public void setCodigo(int codigoGrupo) {
-        this.codigo = codigoGrupo;
+    public List<Investigador> getInvestigadores() {
+        return investigadores;
     }
+
+
 
     public String getNombre() {
         return nombre;
@@ -67,30 +73,18 @@ public class Grupo implements Serializable {
         this.codCol = codCol;
     }
 
-    public int getIdGrupo() {
+    public String getIdGrupo() {
         return idGrupo;
     }
 
-    public void setIdGrupo(int idGrupo) {
+    public void setIdGrupo(String idGrupo) {
         this.idGrupo = idGrupo;
 
     }
 
-    public void setInvestigadores(Investigador investigador) {
-        if (this.investigadores == null) {
-            this.investigadores = new ArrayList<>();
-        }
-
-        this.investigadores.add(investigador);
-    }
-
-    public List<Investigador> getInvestigadores() {
-        return investigadores;
-    }
-
     @Override
     public String toString() {
-        return "Grupo{" + "codigo=" + codigo + ", id_grupo=" + idGrupo + ", nombre=" + nombre + ", codigo_col=" + codCol + ", ivestigadores=" + investigadores + '}';
+        return "Grupo{" + "idGrupo=" + idGrupo + ", nombre=" + nombre + ", codigo_col=" + codCol + ", investigadores=" + investigadores +'}';
     }
 
 }

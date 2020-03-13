@@ -27,9 +27,9 @@ public class InvestigadorServiceRS {
 
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
-    @Path("{codigo}") //hace referencia al path: /personas/{id}, ej. /personas/1
-    public Investigador encontrarInvestigador(@PathParam("codigo") int codigo) {
-        Investigador investigador = investigadorDao.encontrarInvestigador(new Investigador(codigo));
+    @Path("{idInvestigador}") //hace referencia al path: /personas/{id}, ej. /personas/1
+    public Investigador encontrarInvestigador(@PathParam("idInvestigador") String idInvestigador) {
+        Investigador investigador = investigadorDao.encontrarInvestigador(new Investigador(idInvestigador));
         System.out.println("Investigador encontrado:" + investigador);
         return investigador;
     }
@@ -46,12 +46,13 @@ public class InvestigadorServiceRS {
     @PUT
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Produces(value = MediaType.APPLICATION_JSON)
-    @Path("{codigo}")
-    public Response modificarInvestigador(@PathParam("codigo") int codigo, Investigador investigadorModificado) {
-        Investigador investigador = investigadorDao.encontrarInvestigador(new Investigador(codigo));
+    @Path("{idInvestigador}")
+    public Response modificarInvestigador(@PathParam("idInvestigador") String idInvestigador, Investigador investigadorModificado) {
+        Investigador investigador = investigadorDao.encontrarInvestigador(new Investigador(idInvestigador));
         if ( investigador != null) {
             investigadorDao.actualizarInvestigador(investigadorModificado);
             System.out.println("Investigador modificado:" + investigadorModificado);
+            eliminarInvestigador(idInvestigador);
             return Response.ok().entity(investigadorModificado).build();
         } else {
             return Response.status(Status.NOT_FOUND).build();
@@ -61,10 +62,10 @@ public class InvestigadorServiceRS {
 
     @DELETE
     @Produces(value = MediaType.APPLICATION_JSON)
-    @Path("{codigo}")
-    public Response eliminarInvestigador(@PathParam("codigo") int codigo) {
-        investigadorDao.eliminarInvestigador(new Investigador(codigo));
-        System.out.println("Investigador eliminado con el codigo:" + codigo);
+    @Path("{idInvestigador}")
+    public Response eliminarInvestigador(@PathParam("idInvestigador") String idInvestigador) {
+        investigadorDao.eliminarInvestigador(new Investigador(idInvestigador));
+        System.out.println("Investigador eliminado con el idInvestigador:" + idInvestigador);
         return Response.ok().build();
     }
 }

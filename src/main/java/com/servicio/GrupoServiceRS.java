@@ -26,9 +26,9 @@ public class GrupoServiceRS {
 
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
-    @Path("{codigo}") //hace referencia al path: /personas/{id}, ej. /personas/1
-    public Grupo encontrarGrupo(@PathParam("codigo") int codigo) {
-        Grupo grupo = grupoDao.encontrarGrupo(new Grupo(codigo));
+    @Path("{idGrupo}") //hace referencia al path: /personas/{id}, ej. /personas/1
+    public Grupo encontrarGrupo(@PathParam("idGrupo") String idGrupo) {
+        Grupo grupo = grupoDao.encontrarGrupo(new Grupo(idGrupo));
         System.out.println("Grupo encontrado:" + grupo);
         return grupo;
     }
@@ -45,12 +45,13 @@ public class GrupoServiceRS {
     @PUT
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Produces(value = MediaType.APPLICATION_JSON)
-    @Path("{codigo}")
-    public Response modificarGrupo(@PathParam("codigo") int codigo, Grupo grupoModificado) {
-        Grupo grupo = grupoDao.encontrarGrupo(new Grupo(codigo));
+    @Path("{idGrupo}")
+    public Response modificarGrupo(@PathParam("idGrupo") String idGrupo, Grupo grupoModificado) {
+        Grupo grupo = grupoDao.encontrarGrupo(new Grupo(idGrupo));
         if ( grupo != null) {
             grupoDao.actualizarGrupo(grupoModificado);
             System.out.println("grupo modificado:" + grupoModificado);
+            eliminarGrupo(idGrupo);
             return Response.ok().entity(grupoModificado).build();
         } else {
             return Response.status(Status.NOT_FOUND).build();
@@ -60,10 +61,10 @@ public class GrupoServiceRS {
 
     @DELETE
     @Produces(value = MediaType.APPLICATION_JSON)
-    @Path("{codigo}")
-    public Response eliminarGrupo(@PathParam("codigo") int codigo) {
-        grupoDao.eliminarGrupo(new Grupo(codigo));
-        System.out.println("grupo eliminado con el codigo:" + codigo);
+    @Path("{idGrupo}")
+    public Response eliminarGrupo(@PathParam("idGrupo") String idGrupo) {
+        grupoDao.eliminarGrupo(new Grupo(idGrupo));
+        System.out.println("grupo eliminado con el idGrupo:" + idGrupo);
         return Response.ok().build();
     }
 }

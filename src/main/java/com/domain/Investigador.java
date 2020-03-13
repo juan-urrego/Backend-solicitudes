@@ -7,45 +7,41 @@ import javax.persistence.*;
 @Entity
 @Table(name = "investigadores")
 @NamedQueries({
-    @NamedQuery(name = "Investigador.encontrarTodosInvestigadores", query = "SELECT g FROM Investigador g ORDER BY g.codigo")
+    @NamedQuery(name = "Investigador.encontrarTodosInvestigadores", query = "SELECT g FROM Investigador g ORDER BY g.idInvestigador")
 })
 public class Investigador implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
-    private int codigo;
     @Column(name = "id_investigador")
-    private int idInvestigador;
+    private String idInvestigador;
     private String nombre;
     private int telefono;
-    
-    
+
     @ManyToMany(mappedBy = "investigadores")
     private List<Grupo> grupos;
-
+    
     public Investigador() {
     }
 
-    public Investigador(int codigo) {
-        this.codigo = codigo;
+    public Investigador(String idInvestigador) {
+        this.idInvestigador = idInvestigador;
     }
 
-    public Investigador(int codigo,int idInvestigador, String nombre, int telefono) {
-        this.codigo = codigo;
+    public Investigador(String idInvestigador, String nombre, int telefono, List<Grupo> grupos) {
         this.idInvestigador = idInvestigador;
         this.nombre = nombre;
         this.telefono = telefono;
+        this.grupos = grupos;
     }
 
-    public int getCodigo() {
-        return codigo;
+
+    public String getIdInvestigador() {
+        return idInvestigador;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setIdInvestigador(String idInvestigador) {
+        this.idInvestigador = idInvestigador;
     }
-
 
     public String getNombre() {
         return nombre;
@@ -62,12 +58,7 @@ public class Investigador implements Serializable {
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
-
-    @Override
-    public String toString() {
-        return "Investigador{" + "codigo=" + codigo + ", Id_Investigador=" + idInvestigador + ", nombre=" + nombre + ", telefono="+ telefono + ", grupos=" + grupos + '}';
-    }
-
+    
     public List<Grupo> getGrupos() {
         return grupos;
     }
@@ -76,11 +67,11 @@ public class Investigador implements Serializable {
         this.grupos = grupos;
     }
 
-    public int getIdInvestigador() {
-        return idInvestigador;
+    @Override
+    public String toString() {
+        return "Investigador{" + "idInvestigador=" + idInvestigador + ", nombre=" + nombre + ", telefono=" + telefono + '}';
     }
 
-    public void setIdInvestigador(int idInvestigador) {
-        this.idInvestigador = idInvestigador;
-    }
+
+  
 }
